@@ -1,0 +1,28 @@
+{
+  "name": "funcionarios",
+  "version": "1.0.0",
+  "description": "Subprojeto fictício para estudo do package.json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dahan-schuster/JavaScriptExercicios.git"
+  },
+  "keywords": [
+    "node",
+    "estudos",
+    "js",
+    "package.json"
+  ],
+  "author": "Dahan Schuster",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dahan-schuster/JavaScriptExercicios/issues"
+  },
+  "homepage": "https://github.com/dahan-schuster/JavaScriptExercicios#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
