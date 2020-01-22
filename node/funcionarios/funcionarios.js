@@ -11,19 +11,19 @@ const url = 'http://files.cod3r.com.br/curso-js/funcionarios.json'
 
 const axios = require('axios') // cliente HTTP baseado em Promises
 
+const mulheres = funcionario => funcionario.genero == 'F'
+const chinesas = mulher => mulher.pais == 'China'
+const aDeMenorSalario = (anterior, atual) => anterior.salario > atual.salario ? atual : anterior
+
 // (function(){}).then() -> Conceito de promises em JavaScript
 // Haverá exercícios falando sobre este conceito no futuro
 // Por enquanto um resumo: uma função assíncrona faz alguma coisa
 // e PROMETE (new Promise()) retornar algo quando acabar, 
 // e ENTÃO (then()) podemos fazer algo com o retorno 
-axios.get(url).then(response => {
-    const funcionarios = response.data // o JSON retornado pela URL
-    // console.log(funcionarios) // para conferir, descomente
-    console.log(resolverDesafio(funcionarios))
-})
+axios.get(url).then(response => console.log(resolverDesafio(response.data)))
 
-const resolverDesafio = funcionarios => {
-    const mulheres = funcionarios.filter(f => f.genero == 'F')
-    const chinesas = mulheres.filter(m => m.pais == 'China')
-    return aDeMenorSalario = chinesas.reduce((p, c) => p.salario > c.salario ? c : p, chinesas[0])
-}
+const resolverDesafio =
+    funcionarios => funcionarios
+        .filter(mulheres)
+        .filter(chinesas)
+        .reduce(aDeMenorSalario)
