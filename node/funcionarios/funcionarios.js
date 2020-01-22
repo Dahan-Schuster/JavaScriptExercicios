@@ -23,5 +23,7 @@ axios.get(url).then(response => {
 })
 
 const resolverDesafio = funcionarios => {
-    return 'Pule para o próximo commit, hehe'
+    const mulheres = funcionarios.filter(f => f.genero == 'F')
+    const chinesas = mulheres.filter(m => m.pais == 'China')
+    return aDeMenorSalario = chinesas.reduce((p, c) => p.salario > c.salario ? c : p, chinesas[0])
 }
