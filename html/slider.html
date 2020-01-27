@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slider</title>
+    <style>
+
+        body {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        div[slider] {
+            grid-column-start: 2;
+            width: 600px;
+            overflow: hidden;
+        }
+
+        p {
+            position: relative;
+            display: none;
+        }
+
+        img {
+            width: 513px
+        }
+
+        .texto {
+            width: 513px;
+            text-align: justify;
+        }
+
+        .texto>img {
+            width: 50px !important;
+            height: 50px !important;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .imagem-via-css {
+            width: 513px;
+            height: 342px;
+            background-image: url(http://files.cod3r.com.br/curso-web/imagem4.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 200%;
+        }
+    </style>
+</head>
+
+<body>
+    <div slider>
+        <p>
+            <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg" alt="Imagem 1" title="Muro da cidade">
+        </p>
+
+        <p>
+            <img src="http://files.cod3r.com.br/curso-web/imagem2.gif" alt="Imagem 2" title="Gif COD3R">
+        </p>
+
+        <p>
+            <img src="http://files.cod3r.com.br/curso-web/imagem3.png" alt="Imagem 3" title="Imagem Circular">
+        </p>
+
+        <p class="texto">
+            <img src="http://files.cod3r.com.br/curso-web/avatar.jpg" alt="Imagem 4" title="Imagem com texto">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut eros luctus, volutpat nisi eu, vestibulum
+            velit. Curabitur quis quam sed erat congue gravida fermentum vel neque. Cras vestibulum diam eget velit
+            luctus
+            dignissim ac ac dolor. Nunc a tellus eget nunc interdum iaculis convallis at purus. Integer diam est,
+            bibendum
+            et neque nec, porta facilisis metus. Praesent feugiat tellus ut purus fermentum, non suscipit tortor
+            fermentum.
+            Quisque a lacus ut metus sollicitudin aliquam. Cras lorem quam, mattis ac blandit consectetur, cursus id
+            tortor.
+            Cras viverra libero scelerisque tortor posuere ultrices. Aenean sodales est quam, in suscipit nisi malesuada
+            et.
+            Curabitur eu velit in ex accumsan rutrum cursus nec tellus. Fusce nec pretium turpis, vitae convallis erat.
+        </p>
+
+        <p class="imagem-via-css"></p>
+
+        <p>
+            <picture>
+                <source srcset="http://files.cod3r.com.br/curso-web/logo-larga.png" media="(min-width: 800px)"
+                    title="Logo larga">
+                <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" title="Logo estreita" alt="Imagem 4">
+            </picture>
+        </p>
+    </div>
+
+    <script>
+
+        const VELOCIDADE_MOVIMENTO  = 20 // ms
+        const PASSO_DO_MOVIMENTO    = 5 // px
+
+        function moverElemento(elemento, posicaoInicial, posicaoFinal, passo, callBack) {
+            if (posicaoInicial >= posicaoFinal) {
+                elemento.style.display = 'none'
+                callBack(elemento)
+            } else {
+                elemento.style.left = `${posicaoInicial}px`
+                let novaPosicaoInicial = posicaoInicial + passo
+                setTimeout(() => moverElemento(elemento, novaPosicaoInicial, posicaoFinal, passo, callBack), VELOCIDADE_MOVIMENTO)
+            }
+        }
+
+        const slides = Array.from(document.querySelectorAll('[slider] > p'));
+        const divSlider = document.querySelector('[slider]')
+        
+        function getProximoSlide(slideAtual) {
+            let index = slides.indexOf(slideAtual) + 1
+            return index < slides.length ? slides[index] : slides[0]
+        }
+
+        function passarImagem(elemento) {
+            let proximaImagem = getProximoSlide(elemento)
+            proximaImagem.style.display = 'block'
+
+            let posicaoInicial = divSlider.clientWidth - proximaImagem.clientWidth * 2
+            let posicaoFinal = divSlider.clientWidth
+            moverElemento(proximaImagem, posicaoInicial, posicaoFinal, PASSO_DO_MOVIMENTO, passarImagem)
+        }
+
+        (function slider() {
+            passarImagem(slides[0])
+        })()
+
+    </script>
+</body>
+
+</html>
