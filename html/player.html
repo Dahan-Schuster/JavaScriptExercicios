@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Player de vídeo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <style>
+        body {
+            width: 1000px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .progresso {
+            width: 800px;
+            height: 5px;
+            margin: 12px auto;
+            border: 1px solid black;
+            transition: all .1s linear;
+            cursor: pointer;
+        }
+
+        .progresso:hover {
+            margin-top: 2px;
+            height: 15px;
+        }
+
+        .progresso>.concluido {
+            background-color: purple;
+            float: left;
+            height: inherit;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 50%;
+            padding: 10px 12px;
+            background-color: purple;
+        }
+
+        button:hover {
+            background-color: rgb(88, 1, 88);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        Alguns atributos da tag <video> :
+            autoplay : inicia automaticamente o vídeo 
+            controlsList="nodownload" : proíbe o download do vídeo
+            controls : mostra uma barra de controle do vídeo
+    -->
+    <video id="video" width="800" height="450">
+        <source src="http://files.cod3r.com.br/curso-web/video.mp4" type="video/mp4">
+        Seu browser não suporta nenhum dos formatos de vídeo que tentamos :(
+    </video>
+
+    <div progresso="video" class="progresso">
+        <div class="concluido"></div>
+    </div>
+
+    <div>
+        <button onclick="video.play()">
+            <i class="fa fa-play"></i>
+        </button>
+        <button onclick="video.pause()">
+            <i class="fa fa-pause"></i>
+        </button>
+    </div>
+
+    <script>
+
+        const barra_progresso = document.querySelector(['[progresso=video]'])
+        const concluido = document.querySelector('[progresso=video] > .concluido')
+        const video = document.querySelector('#video')
+
+        function atualizarBarraDeProgresso(progresso) {
+            concluido.style.width = `${progresso}%`
+        }
+
+        // total representa o valor de 100%, mas em outra unidade (ex.: px, segundos etc)
+        function converterParaPorcentagem(total, atual) {
+            /*
+             * regra de três:
+             * total = 100%
+             * atual =  x % 
+             */
+            return (100 * atual) / total
+        }
+
+        video.ontimeupdate = function () {
+            let progresso = converterParaPorcentagem(video.duration, video.currentTime)
+            atualizarBarraDeProgresso(progresso)
+        }
+
+        barra_progresso.onmousedown = function() { this.estaClicado = true }
+        barra_progresso.onmouseup = function() {this.estaClicado = false}
+        barra_progresso.onclick = alterarProgresso
+        barra_progresso.onmousemove = verificarSeEstaClicado
+
+        function verificarSeEstaClicado(event) {
+            if (barra_progresso.estaClicado === true) {
+                alterarProgresso(event)
+            }
+        }
+
+        function alterarProgresso(event) {
+            let posicaoDoClique = event.pageX - barra_progresso.offsetLeft
+            video.currentTime = (video.duration * posicaoDoClique) / barra_progresso.clientWidth
+            let progresso = converterParaPorcentagem(barra_progresso.clientWidth, posicaoDoClique)
+            atualizarBarraDeProgresso(progresso)
+        }
+
+    </script>
+</body>
+
+</html>
