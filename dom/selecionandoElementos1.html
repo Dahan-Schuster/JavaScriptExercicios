@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Selecionar Elementos #01</title>
     <link rel="stylesheet" href="css/estilo.css">
 </head>
+
 <body class="conteudo exercicio">
     <div style="cursor: pointer;" id="primeiro">#primeiro</div>
     <div>Segundo</div>
     <div class="terceiro ultimo">.terceiro .ultimo</div>
-    <script>              
-        // ...
+    <script>
+        document.getElementById('primeiro').onclick = function () {
+            this.classList.remove('destaque')
+        }
+
+        const divs = document.getElementsByTagName('div')
+
+        // Array.from irá transformar a constante divs, que é um HTMLCollection, em um array
+        alert('Adicionando destaque a todas as divs...')
+        Array.from(divs).map(e => e.classList.add('destaque'))
+
+        // O mesmo resultado pode ser obtido com o operador spread
+        const divsArray = [...divs]
+        console.log(divsArray)
+
+        const ultimosElementos = document.getElementsByClassName('ultimo')
+        alert('Removendo o destaque dos elementos com classe .ultimo...')
+        for (let e of ultimosElementos) {
+            e.classList.remove('destaque')
+        }
+
     </script>
 </body>
+
 </html>
