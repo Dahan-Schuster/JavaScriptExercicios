@@ -8,9 +8,49 @@
 <body class="conteudo exercicio">
     <div id="primeiro">#primeiro</div>
     <div>Segundo</div>
-    <div class="terceiro ultimo"><span wb-attrib>.terceiro .ultimo</span></div>
-    <script>              
-        // ...
+    <div class="terceiro ultimo"><span attrib>.terceiro .ultimo</span></div>
+    <button onclick="start()">Começar</button>
+    <script src="js/util.js"></script>
+    <script>
+
+        async function start() {
+            desselecionar('*')
+
+            await sleep(700)
+            alert('Selecionando com o ID #primeiro ...')
+            selecionar('#primeiro')
+            
+            await sleep(700)
+            alert('Selecionando com as classes .terceiro e .ultimo ...')
+            selecionar('.terceiro.ultimo')
+
+            await sleep(700)
+            alert('Desselecionando todos com o seletor * ...')
+            desselecionar('*')
+            
+            await sleep(700)
+            alert('Selecionando com a pseudo-classe :not e o parâmetro (#primeiro) ...')
+            selecionar(':not(#primeiro)')
+            
+            await sleep(700)
+            alert('Selecionando os primogênitos com a pseudo-classe :nth-child e o parâmetro (1) ...')
+            desselecionar('*')
+            selecionar(':nth-child(1)')
+            
+            await sleep(700)
+            alert('Selecionando a segunda div com a pseudo-classe :nth-of-type e o parâmetro (2) ...')
+            desselecionar('*')
+            selecionar(':nth-of-type(2)')
+            
+            await sleep(700)
+            alert('Selecionando com o atributo [attrib] ...')
+            desselecionar('*')
+            selecionar('[attrib]')
+
+            await sleep(700)
+            alert('Acabou!')
+            desselecionar('*')
+        }
     </script>
 </body>
 </html>
