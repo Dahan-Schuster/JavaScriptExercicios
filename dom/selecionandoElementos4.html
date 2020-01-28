@@ -15,14 +15,55 @@
         <ul>
             <li>Pedro</li>
             <li>Ana</li>
-            <li>Bia</li>
+            <li>
+                Bia
+                <br>
+            </li>
         </ul>
     </div>
     <div>
         <p>Fim</p>
     </div>
     <script>
-        // ...
+
+        alert('Abra o console (f12) para continuar com o exercício')
+
+        function log(mensagem = '>') {
+            console.log(mensagem, this)
+        }
+
+        HTMLCollection.prototype.log = log
+        HTMLElement.prototype.log = log
+        NodeList.prototype.log = log
+        Node.prototype.log = log
+
+        console.log("O método querySelector retorna uma NodeList, que considera textos e espaços em branco como parentes de um elemento")
+
+        const lista = document.querySelector('div ul')
+        lista.log('Olá, sou uma ul. Vou te mostrar minha família, icluindo meus filhos adotivos!')
+
+        lista.parentNode.log("Lhe apresento minha mãe, uma div:")
+        lista.childNodes.log("Lhe apresento meus filhos:")
+
+        console.log()
+
+        const primeiro = lista.firstChild
+        primeiro.log('Sou o filho adotado mais velho da ul, um texto!')
+        primeiro.nextSibling.log('Este é meu irmão, o primogênito verdadeiro:')
+
+        const ultima = lista.lastChild
+        ultima.log('Sou a caçula adotada da ul!')
+        ultima.previousSibling.log('Esta é a caçula original:')
+
+        console.log()
+        console.log('Os métodos "children", "firstElementChild", "previousElementChild" e outros retornam apenas os elementos HTML como parentes de outro elemento')
+
+        lista.children.log('Meus filhos de sangue:')
+        lista.firstElementChild.log('Sou o primogênito da ul')
+        lista.lastElementChild.log('Sou a caçula da ul')
+        lista.parentNode.previousElementSibling.log('Sou a tia da ul')
+        lista.parentNode.nextElementSibling.log('Sou o tio da ul')
+
     </script>
 </body>
 
