@@ -21,7 +21,7 @@
 </head>
 
 <body class="conteudo exercicio">
-    <h1>Formulário</h1>
+    <h1> Formulário</h1 name="pesquisa">
     <form name="pesquisa" action="http://www.google.com.br/search">
         <input type="text" name="q" placeholder="Digite o termo...">
         <select name="hl">
@@ -31,7 +31,13 @@
         <button>Pesquisar</button>
     </form>
     <script>
-        // ...
+        console.log('Todos os formulários:', document.forms)
+        console.log('O primeiro formulário:', document.forms[0])
+        console.log('Todos os elementos com o nome "pesquisa":', document.getElementsByName('pesquisa'))
+        console.log('Todos os formulários com o nome "pesquisa":', document.pesquisa)
+        console.log('O elemento de nome "q" dentro do formulário de nome "pesquisa":', document.pesquisa.q)
+
+        document.pesquisa.q.value = 'Meu valor foi alterado via JS!'
     </script>
 </body>
 
