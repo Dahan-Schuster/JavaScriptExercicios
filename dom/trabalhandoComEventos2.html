@@ -3,13 +3,26 @@
 
 <head>
     <meta charset='UTF-8'>
-    <title>Trabalhando com Eventos #02</title>
+    <title>Mova a caixa!</title>
     <link rel='stylesheet' href='css/estilo.css'>
 </head>
 
 <body class="conteudo exercicio">
-    <div>Elemento</div>
+    <div>Mova-me</div>
     <script>
-        // ...
+        const caixa = document.querySelector('div')
+
+        caixa.style.position = 'absolute'
+
+        caixa.onmousemove = function (event) {
+            caixa.style.cursor = 'grab'
+            if (event.buttons) {
+                caixa.style.cursor = 'grabbing'
+                caixa.style.left = `${event.pageX - this.clientWidth / 2}px`
+                caixa.style.top = `${event.pageY - this.clientHeight / 2}px`
+            }
+        }
+
+        caixa.onselectstart = () => false
     </script>
 </body>

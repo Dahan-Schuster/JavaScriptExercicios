@@ -12,10 +12,30 @@
         <a href='https://www.cod3r.com.br'>Cod3r</a>
     </div>
     <div id='primeiro'>
-        <img src='http://files.cod3r.com.br/curso-web/logo-estreita.png' alt='logo'>
+        <img title="Cod3r" src='http://files.cod3r.com.br/curso-web/logo-estreita.png' alt='logo'>
     </div>
     <script>
-        // ...
+        const img = document.querySelector('img')
+        console.log(img)
+
+        console.log('Atributos definidos dentro da tag:')
+        console.log('método getAttribute >', img.getAttribute('src'))
+        console.log('elemento.atributo (img.alt) > ', img.alt)
+        console.log('elemento["atributo"] (img["title"]) > ', img["title"])
+        
+        console.log('Atributos definidos automaticamente:')
+        console.log('nodeType:', img.nodeType)
+        console.log('nodeName:', img.nodeName)
+
+        console.log('getAttributeNode() retorna um atributo de um elemento como um nó (node). Há algumas possibilidades a mais ao usar este método ao invés de getAttribute()')
+        console.log('Vamos explorar o atributo SRC da tag IMG como um node')
+        const src = img.getAttributeNode('src')
+        console.log("img.getAttributeNode('src') > ", src)
+        console.log('nodeType:', src.nodeType)
+        console.log('nodeName:', src.nodeName)
+        console.log('nodeValue:', src.nodeValue)
+
+
     </script>
 </body>
 
