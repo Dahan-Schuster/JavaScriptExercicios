@@ -10,7 +10,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         form input,
         form select,
         form button {
@@ -22,15 +22,41 @@
 
 <body class="conteudo exercicio">
     <h1>Formulário</h1>
-    <form name="pesquisa" action="http://www.google.com.br/search">
-        <input type="text" name="q" placeholder="Digite o termo...">
+    <form formulario name="pesquisa" action="http://www.google.com.br/search">
+        <input autocomplete="off" type="text" name="q" placeholder="Digite o termo...">
         <select name="hl">
-                <option value="pt-br">Português (Brasil)</option>
-                <option value="en-us">Inglês (Americano)</option>
-            </select>
-        <button wm-submit>Pesquisar</button>
+            <option value="pt-br">Português (Brasil)</option>
+            <option value="en-us">Inglês (Americano)</option>
+        </select>
+        <button>Pesquisar</button>
     </form>
     <script>
-        // ...
+        "use strict" // ajuda a prevenir erros que normalmente seriam ignorados
+
+        const form = document.querySelector('[formulario]')
+
+        form.onsubmit = function (event) {
+            event.preventDefault()
+            const formData = new FormData(form)
+            formData.append('ajax', true)
+            console.log(formData.get('q'))
+            console.log(formData.has('hl'))
+
+            // Exemplo do "use strict":
+            // Tente tirar o 'let' da frente de 'dado' e execute o programa
+            // Agora comente a linha "use strict" e tente novamente
+            // Nenhum erro, né?
+            // Sabe porque é ruim não ver esse erro?
+            // Sem o "use strict", tente acessar a variável 'window.dado' fora do for
+            // hehehe, viu? Sem o let, a variável dado é adicionada ao objeto window
+            // Imagina a merda! Se você tiver uma variável com o mesmo nome de um
+            // atributo do objeto window, irá sobrescrevê-lo!
+            // Vamos usar mais "use strict" ;)
+            // Ah, o foco deste exercício são os eventos relacionados a formulários :v
+            // Isto foi só um adendo ^^
+            for (let dado of formData) {
+                console.log(dado)
+            }
+        }
     </script>
 </body>

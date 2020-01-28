@@ -1,0 +1,26 @@
+[flappy] {
+    display: flex;
+    justify-content: none;
+    background: linear-gradient(to bottom, aqua, aquamarine);
+    width: 100%;
+    height: inherit;
+    overflow: hidden;
+}
+
+.canos {
+    height: inherit;
+    width: fit-content;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-grow: 0;
+}
+
+.cano {
+    background: linear-gradient(to right, rgb(15, 172, 15), rgb(9, 109, 9));
+    width: 140px;
+    height: 500px;
+    border: 1px solid black;
+    position: relative;
+}
